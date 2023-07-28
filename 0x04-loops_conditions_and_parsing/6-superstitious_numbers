@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
-#Creating a script that uses case statements
-x=1
-while [ $x -le 20 ]
+# using case statement
+cnt=1
+while [ $cnt -le 20 ]
 do
-    echo "$x"
-    case $x in
-	4)
-	    echo "bad luck from China"
-	    ;;
-	9)
-	    echo "bad luck from Japan"
-	    ;;
-	17)
-	    echo "bad luck from Italy"
-	    ;;
-    esac
-    ((x++))
+	echo "$cnt"
+	case $cnt in
+		4)
+			echo "bad luck from China"
+			;;
+		9)
+			echo "bad luck from Japan"
+			;;
+		17)
+			echo "bad luck from Italy"
+			;;
+		esac
+	((cnt++))
 done
