@@ -1,3 +1,6 @@
 #!/usr/bin/env bash
-# Bash script that displays a list of currently running processes.
-kill -TERM $(echo $$)
+# Bash script that displays lines containing the bash word.
+
+id="4-to_infinity_and_beyond"
+pid=$(pgrep -f "$id")
+kill -TERM "$pid"
