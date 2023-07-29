@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Bash script that displays lines containing the bash word.
+
+pkill -f "4-to_infinity_and_beyond"
