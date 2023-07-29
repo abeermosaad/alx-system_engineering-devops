@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-# Bash script that displays lines containing the bash word.
+# Bash script that kills the process 7-highlander.
 
-process_name="7-highlander"
-pid=$(pgrep -f "$process_name")
-kill -KILL "$pid"
+pkill -9 -f "7-highlander"
