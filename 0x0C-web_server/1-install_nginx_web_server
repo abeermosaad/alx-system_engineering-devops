@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Install nginx on web-01
-Install nginx on your web-01 -y
-sudo chmod 666 index.nginx-debian.html
+sudo apt-get install nginx -y
+sudo chmod 666 /var/www/html/index.nginx-debian.html
 sudo echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
 sudo nginx -s reload
