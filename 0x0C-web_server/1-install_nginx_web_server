@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Install nginx on web-01
+Install nginx on your web-01 -y
