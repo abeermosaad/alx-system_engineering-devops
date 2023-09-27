@@ -5,7 +5,7 @@ sudo apt-get install nginx -y
 sudo ufw allow 'Nginx HTTP'
 sudo echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
 sudo mkdir -p /var/www/abeermosaad.tech/html
-sudo echo "Ceci n'est pas une page\n" | sudo tee /var/www/abeermosaad.tech/html/custom_404.html
+sudo echo -e "Ceci n'est pas une page\n" | sudo tee /var/www/abeermosaad.tech/html/custom_404.html
 sudo sed -i '/^[^#]*server_name.*;$/a \ \n\tlocation \/redirect_me {\n\t\treturn 301 https://www.linkedin.com/in/abeermosaad/;\n\t}' /etc/nginx/sites-available/default
 sudo sed -i '/^[^#]*server_name.*;$/a \ \n\terror_page 404 \/html\/custom_404.html;\n\tlocation = \/html\/custom_404.html {\n\t\tinternal;\n\t\troot /var/www/abeermosaad.tech/html;\n\t}' /etc/nginx/sites-available/default
 sudo service nginx reload
