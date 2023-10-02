@@ -11,3 +11,4 @@ sudo sed -i '/^[^#]*server_name.*;$/a \ \n\tlocation \/redirect_me {\n\t\treturn
 sudo sed -i '/^[^#]*server_name.*;$/a \ \n\terror_page 404 \/custom_404.html;\n\tlocation = \/custom_404.html {\n\t\tinternal;\n\t\troot /var/www/abeermosaad.tech/html;\n\t}' /etc/nginx/sites-available/default
 sed -i "/server {/a\n\n\tadd_header X-Served-By $hostname;" /etc/nginx/sites-available/default
 sudo sevice nginx start
+sudo nginx -s reload
