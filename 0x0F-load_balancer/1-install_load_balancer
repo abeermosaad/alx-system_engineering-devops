@@ -1,6 +1,7 @@
 #!/usr/bin/env basha\
 # Install and configure HAproxy load palancer
 sudo apt-get update
+sudo apt-get -y upgrade
 sudo apt-get -y install haproxy
 echo "\
 frontend haproxy_balancer
