@@ -1,4 +1,4 @@
-#!/usr/bin/env basha\
+#!/usr/bin/env bash
 # Install and configure HAproxy load palancer
 sudo apt-get update
 sudo apt-get -y upgrade
@@ -11,7 +11,7 @@ frontend haproxy_balancer
 
 backend webservers
     balance roundrobin
-    server 348858-web-01 100.26.230.167:80 check
-    server 348858-web-02 34.202.164.217:80 check
+    server 348858-web-01 100.26.230.167:80
+    server 348858-web-02 34.202.164.217:80
 " | sudo tee -a /etc/haproxy/haproxy.cfg > /dev/null 2>&1
 sudo service haproxy restart
