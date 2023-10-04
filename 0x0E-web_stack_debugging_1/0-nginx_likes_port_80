@@ -8,4 +8,4 @@ sed -i '/^server {/{n;d;n;d;}' /etc/nginx/sites-available/default
 sed -i '/^server {/{n;d;n;d;}' /etc/nginx/sites-available/default
 sed -i '/^server {/a  \\t\tlisten 80 default_server;\n\t\tlisten [::]:80 default_server ipv6only=on;\n' /etc/nginx/sites-available/default
 sudo service nginx start
-
+sudo service nginx restart
