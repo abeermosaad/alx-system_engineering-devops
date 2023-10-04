@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Configure nginx on the container
+sudo apt update
+sudo apt install curl -y
+sudo service apache2 stop
+apt-get install -y nginx
+sudo service nginx start
