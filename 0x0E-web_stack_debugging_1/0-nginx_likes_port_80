@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 # Configure nginx on the container
 sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 sudo service nginx reload
