@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# This script will check the subdomain of a given domain
 get_subdomain() {
     if [ $# -lt 2 ]; then
         dig www.$1 | grep -A1 'ANSWER SECTION:' | tail -n 1 | awk '{print "The subdomain www is an A record and points to " $5}'
