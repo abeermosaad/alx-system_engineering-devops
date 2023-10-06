@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
 # Configure nginx on the container
-sed -i '/^server {/{n;d;n;d;}' /etc/nginx/sites-available/default
-sed -i '/^server {/{n;d;n;d;}' /etc/nginx/sites-available/default
-sed -i '/^server {/a  \\t\tlisten 80 default_server;\n\t\tlisten [::]:80 default_server ipv6only=on;' /etc/nginx/sites-available/default
+sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
 sudo service nginx reload
