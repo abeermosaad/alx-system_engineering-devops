@@ -2,12 +2,13 @@
 # This script will check the subdomain of a given domain
 get_subdomain() {
     if [ $# -lt 2 ]; then
-        dig www.$1 | grep -A1 'ANSWER SECTION:' | tail -n 1 | awk '{print "The subdomain www is an A record and points to " $5}'
-        dig lb-01.$1 | grep -A1 'ANSWER SECTION:' | tail -n 1 | awk '{print "The subdomain lb-01 is an A record and points to " $5}'
-        dig web-01.$1 | grep -A1 'ANSWER SECTION:' | tail -n 1 | awk '{print "The subdomain web-01 is an A record and points to " $5}'
-        dig web-02.$1 | grep -A1 'ANSWER SECTION:' | tail -n 1 | awk '{print "The subdomain web-02 is an A record and points to " $5}'
+        dig www.$1 | grep -A1 'ANSWER SECTION:' | tail -n 1 | awk '{print "The subdomain www is a A record and points to " $5}'
+        dig lb-01.$1 | grep -A1 'ANSWER SECTION:' | tail -n 1 | awk '{print "The subdomain lb-01 is a A record and points to " $5}'
+        dig web-01.$1 | grep -A1 'ANSWER SECTION:' | tail -n 1 | awk '{print "The subdomain web-01 is a A record and points to " $5}'
+        dig web-02.$1 | grep -A1 'ANSWER SECTION:' | tail -n 1 | awk '{print "The subdomain web-02 is a A record and points to " $5}'
 	else
-		dig $2.$1 | grep -A1 'ANSWER SECTION:' | tail -n 1 | awk -v prefix=$2 '{print "The subdomain " prefix " is an A record and points to " $5}'
+		dig $2.$1 | grep -A1 'ANSWER SECTION:' | tail -n 1 | awk -v prefix=$2 '{print "The subdomain " prefix " is a A record and points to " $5}'
     fi
 }
 get_subdomain "$@"
+
