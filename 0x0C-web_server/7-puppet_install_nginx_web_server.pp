@@ -1,3 +1,4 @@
+# Configuring your server with Puppet!
 exec { 'update':
     path    => '/usr/bin',
     command => 'sudo apt-get update',
