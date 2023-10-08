@@ -1,20 +1,7 @@
-# Configuring your server with Puppet!
-exec { 'update':
-    path    => '/usr/bin',
-    command => 'sudo apt-get update',
-}
+# Configuring server with Puppet!
 
-exec { 'install_nginx':
-    path    => '/usr/bin',
-    command => 'sudo apt-get install nginx -y',
-    unless  => 'dpkg -l | grep -q nginx',
-}
-
-exec { 'allow':
-    path     => '/usr/bin',
-    command  => "sudo ufw allow 'Nginx HTTP'",
-    provider => 'shell',
-    unless   => "sudo ufw status | grep -q 'Nginx HTTP'",
+package { 'nginx':
+  ensure => 'installed',
 }
 
 exec { 'mk dir':
@@ -25,12 +12,16 @@ exec { 'mk dir':
 
 file { '/var/www/html/index.nginx-debian.html':
     ensure  => 'present',
-    content => "Hello World!\n"
+    content => "Hello World!\n",
+    require => Package['nginx'],
+    notify  => Service['nginx'],
 }
 
 file { '/var/www/abeermosaad.tech/html/custom_404.html':
     ensure  => 'present',
-    content => "Ceci n'est pas une page\n"
+    content => "Ceci n'est pas une page\n",
+    require => Package['nginx'],
+    notify  => Service['nginx'],
 }
 
 file { '/etc/nginx/sites-available/default':
@@ -70,6 +61,7 @@ file { '/etc/nginx/sites-available/default':
 }
 
 service { 'nginx':
-    ensure => running,
-    enable => true
+    ensure  => running,
+    enable  => true,
+    require => Package['nginx'],
 }
