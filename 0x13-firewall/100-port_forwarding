@@ -1,5 +1,5 @@
 #
-# rules.before
+# rules.befor
 #
 # Rules that should be run before the ufw command line added rules. Custom
 # rules should be added to one of these chains:
