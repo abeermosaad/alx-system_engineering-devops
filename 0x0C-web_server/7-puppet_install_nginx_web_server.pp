@@ -1,7 +1,21 @@
 # Configuring server with Puppet!
 
-package { 'nginx':
-  ensure => 'installed',
+exec { 'update':
+    path    => '/usr/bin',
+    command => 'sudo apt-get update',
+}
+
+exec { 'install_nginx':
+    path    => '/usr/bin',
+    command => 'sudo apt-get install nginx -y',
+    unless  => 'dpkg -l | grep -q nginx',
+}
+
+exec { 'allow':
+    path     => '/usr/bin',
+    command  => "sudo ufw allow 'Nginx HTTP'",
+    provider => 'shell',
+    unless   => "sudo ufw status | grep -q 'Nginx HTTP'",
 }
 
 exec { 'mk dir':
@@ -10,58 +24,23 @@ exec { 'mk dir':
     returns => [0, 1],
 }
 
-file { '/var/www/html/index.nginx-debian.html':
+file { '/var/www/abeermosaad.tech/html/index.html':
     ensure  => 'present',
-    content => "Hello World!\n",
-    require => Package['nginx'],
-    notify  => Service['nginx'],
+    content => "Hello World!\n"
 }
 
 file { '/var/www/abeermosaad.tech/html/custom_404.html':
     ensure  => 'present',
-    content => "Ceci n'est pas une page\n",
-    require => Package['nginx'],
-    notify  => Service['nginx'],
+    content => "Ceci n'est pas une page\n"
 }
 
-file { '/etc/nginx/sites-available/default':
-    ensure  => 'present',
-    content => "server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
-
-        root /var/www/html;
-
-        index index.html index.htm index.nginx-debian.html;
-
-        server_name abeermosaad.tech;
-        add_header X-Served-By ${{hostname}};
-
-        location /hbnb_static/ {
-                alias /data/web_static/current/;
-        }
-
-        error_page 404 /custom_404.html;
-        location = /custom_404.html {
-                internal;
-                root /var/www/abeermosaad.tech/html;
-        }
-
-        location /redirect_me {
-                return 301 https://www.linkedin.com/in/abeermosaad/;
-        }
-
-        location / {
-                root /var/www/abeermosaad.tech/html;
-                index index.html;
-                try_files ${{uri}} ${{uri}}/ =404;
-        }
+exec { 'replace_nginx_config':
+  command => "sudo sed -i '/^[^#]*server_name.*;/a \\ \n\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=mN_jYKCTEwU&t=10s;\n\t}' /etc/nginx/sites-available/default && sudo sed -i '/^[^#]*server_name.*;/a \\ \n\tlocation /redirect_me {\n\t\treturn 301 https://www.linkedin.com/in/abeermosaad/;\n\t}' /etc/nginx/sites-available/default && sudo sed -i '/^[^#]*server_name.*;/a \\ \n\terror_page 404 /custom_404.html;\n\tlocation = /custom_404.html {\n\t\tinternal;\n\t\troot /var/www/abeermosaad.tech/html;\n\t}' /etc/nginx/sites-available/default",
+  path    => '/usr/bin',
 }
-"
-}
+
 
 service { 'nginx':
     ensure  => running,
     enable  => true,
-    require => Package['nginx'],
 }

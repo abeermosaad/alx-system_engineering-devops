@@ -1,14 +1,14 @@
+#
 # rules.before
 #
 # Rules that should be run before the ufw command line added rules. Custom
 # rules should be added to one of these chains:
 #   ufw-before-input
 #   ufw-before-output
-
+#   ufw-before-forward
 *nat
 :PREROUTING ACCEPT [0:0]
--A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
-COMMIT
+-A PREROUTING -i eth0 -p tcp --dport 8080 -j REDIRECT --to-port 80
 
 # Don't delete these required lines, otherwise there will be errors
 *filter
@@ -17,6 +17,7 @@ COMMIT
 :ufw-before-forward - [0:0]
 :ufw-not-local - [0:0]
 # End required lines
+
 
 # allow all on loopback
 -A ufw-before-input -i lo -j ACCEPT
@@ -46,7 +47,9 @@ COMMIT
 # allow dhcp client to work
 -A ufw-before-input -p udp --sport 67 --dport 68 -j ACCEPT
 
+#
 # ufw-not-local
+#
 -A ufw-before-input -j ufw-not-local
 
 # if LOCAL, RETURN
@@ -69,6 +72,5 @@ COMMIT
 # allow MULTICAST UPnP for service discovery (be sure the MULTICAST line above
 # is uncommented)
 -A ufw-before-input -p udp -d 239.255.255.250 --dport 1900 -j ACCEPT
-
 # don't delete the 'COMMIT' line or these rules won't be processed
 COMMIT
