@@ -9,7 +9,7 @@ if __name__ == "__main__":
     response = requests.get(url)
     employees = response.json()
 
-    users = len(employees)
+    users = len(employees) + 1
     dictionary = {}
 
     for i in range(1, users):
