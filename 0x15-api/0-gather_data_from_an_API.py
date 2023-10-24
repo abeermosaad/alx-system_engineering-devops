@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Python script that returns information about TODOS list progress"""
 import requests
 import sys
 
