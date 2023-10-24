@@ -4,10 +4,11 @@ import requests
 import sys
 
 if __name__ == "__main__":
-    url = f"https://jsonplaceholder.typicode.com/users/{int(sys.argv[1])}/"
+    arg1 = int(sys.argv[1])
+    url = f"https://jsonplaceholder.typicode.com/users/{arg1}/"
     response = requests.get(url)
 
-    url2 = f"https://jsonplaceholder.typicode.com/todos?userId={int(sys.argv[1])}"
+    url2 = f"https://jsonplaceholder.typicode.com/todos?userId={arg1}"
     response2 = requests.get(url2)
 
     employee = response.json()
@@ -20,8 +21,8 @@ if __name__ == "__main__":
         if todos[i].get('completed'):
             complete += 1
 
-    print(
-        f'Employee {employee.get("name")} is done with tasks({complete}/{total}):')
+    name = employee.get("name")
+    print(f'Employee {name} is done with tasks({complete}/{total}):')
 
     for i in range(total):
         if todos[i].get('completed'):
