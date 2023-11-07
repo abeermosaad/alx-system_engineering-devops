@@ -1,4 +1,5 @@
 def number_of_subscribers(subreddit):
+    """Returns the number of subscribers for a given subreddit"""
     from urllib import request
     import re
 
