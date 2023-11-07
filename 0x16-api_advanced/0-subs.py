@@ -1,7 +1,8 @@
+#!/usr/bin/python3
+""" returns the number of subscribers for a given subreddit """
+import re
+import requests
 def number_of_subscribers(subreddit):
-    """Returns the number of subscribers for a given subreddit"""
-    import re
-    import requests
 
     url = f"https://www.reddit.com/r/{subreddit}/about/"
     res = requests.get(url)
