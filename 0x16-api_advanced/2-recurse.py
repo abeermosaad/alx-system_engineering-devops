@@ -10,15 +10,16 @@ def recurse(subreddit, hot_list=[], after=None):
     res = requests.get(url, headers={'User-Agent': 'abeer'})
 
     if res.status_code != 200:
-        return
+        return None
 
     hot = res.json()
+
+    for article in hot['data']['children']:
+        hot_list.append(article['data']['title'])
+
     if not hot['data']['after']:
         return hot_list
 
     after = hot['data']['after']
-
-    for article in hot['data']['children']:
-        hot_list.append(article['data']['title'])
 
     return (recurse(subreddit, hot_list, after))
